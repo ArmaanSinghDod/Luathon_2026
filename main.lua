@@ -1,12 +1,11 @@
 local Player = Player or require("src.Player")
 local Object = Object or require("lib.classic")
 
-actorList={}
+local actorList={}
 function love.load()
-    player = love.graphics.newImage("src/textures/Player.png")
-  player = Player(350, 10)
-    player.color = {1,1,0}
-    table.insert(actorList, player)
+local p =Player()   
+table.insert(actorList,p)
+
 end
 
 function love.update(dt)
@@ -16,5 +15,7 @@ function love.update(dt)
 end
 
 function love.draw()
-
+    for _, v in pairs(actorList) do
+            v:draw(dt)
+        end
 end
