@@ -1,10 +1,13 @@
 local Player = Player or require("src.Player")
 local Object = Object or require("lib.classic")
+local Potion = Potion or require("src.potion")
 
 local actorList={}
 function love.load()
 local p =Player()   
 table.insert(actorList,p)
+local po = Potion()
+table.insert(actorList,po)
 
 end
 
