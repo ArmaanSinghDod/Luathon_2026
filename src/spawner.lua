@@ -1,5 +1,5 @@
 local Actor = Actor or require "src/actor"
-
+local Potion = require "src/potion"
 local Vector = Vector or require "lib/vector"
 
 local Spawner = Actor:extend()
@@ -28,9 +28,9 @@ function Spawner:update(dt)
 end
 
 function Spawner:trigger()
-  local a =Astro()
-  table.insert(actorList,a)
-  local spawner = Spawner(math.random(0.5,2),false)
+  local  po =Potion()
+  table.insert(actorList,po)
+  local spawner = Spawner(math.random(4,8),false)
   table.insert(actorList,spawner)
 end
 
