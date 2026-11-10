@@ -5,7 +5,7 @@ local Player = Actor:extend()
 local speed = 500
 
 function Player:new(x, y)
-    Player.super.new(self, "src/textures/player.png", x or 180, y or 540, 0)
+    Player.super.new(self, "src/textures/player.png", x or 1180, y or 540, 0)
 end
 
 function Player:update(dt)
@@ -24,7 +24,7 @@ function Player:update(dt)
 end
 
 function Player:draw()
-    love.graphics.scale(0.2,0.2)
+    --love.graphics.scale(0.2,0.2)
     love.graphics.draw(
         self.image,
         self.position.x, self.position.y,

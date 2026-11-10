@@ -30,8 +30,8 @@ end
 function Spawner:trigger()
   local  po =Potion()
   table.insert(actorList,po)
-  local spawner = Spawner(math.random(4,8),false)
-  table.insert(actorList,spawner)
+  --local spawner = Spawner(math.random(4,8),false)
+  --table.insert(actorList,spawner)
 end
 
 function Spawner:draw()

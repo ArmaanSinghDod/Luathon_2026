@@ -5,7 +5,7 @@ local Actor = Object:extend()
 function Actor:new(_image, _x, _y, _speed)
     self.position = Vector.new(_x or 0, _y or 0)
     self.forward = Vector.new(1, 0)
-    self.speed = _speed or 150
+    self.speed = _speed or 0
     self.image = love.graphics.newImage(_image or "src/textures/bear.png")
     self.origin = Vector.new(self.image:getWidth() / 2, self.image:getHeight() / 2)
     self.width = self.image:getWidth()
