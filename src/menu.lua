@@ -25,7 +25,7 @@ function Menu:draw()
     love.graphics.rectangle("fill", 0, 0, screenWidth, screenHeight)
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.setFont(self.titleFont)
-    love.graphics.printf("One Last Potion", 0, screenHeight * 0.27, screenWidth, "center")
+    love.graphics.printf("Almeka", 0, screenHeight * 0.27, screenWidth, "center")
 
     love.graphics.setFont(self.optionFont)
     self.optionBounds = {}

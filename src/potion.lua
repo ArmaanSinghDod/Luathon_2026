@@ -61,7 +61,7 @@ function Potion:craft(player)
     end
 
     player.health = player.maxHealth
-    player.damageGraceTimer = 0.5
+    player.damageGraceTimer = 0.6
     self.visible = true
     self.timer = 0.8
     self.position.x = player.position.x
