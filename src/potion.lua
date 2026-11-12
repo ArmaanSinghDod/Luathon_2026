@@ -1,36 +1,73 @@
-Actor = Actor or require "src/actor"
-Vector = Vector or require "lib/vector"
+local Object = require("lib.classic")
 
-local potion = Actor:extend()
-local timer=0
+local Potion = Object:extend()
 
-love.math.setRandomSeed(os.time())
-function potion:new()
-  local randomX = love.math.random(800)
-  local randomY = love.math.random(600)
- 
-    potion.super.new(self, "src/textures/potion.png", randomX, randomY)
-          --love.graphics.scale(0.2,0.2)
-    self.scale = 0.05
-    self.width = self.image:getWidth() * self.scale
-    self.height = self.image:getHeight() * self.scale
-    --Hace una pocion en una posicion random de la pantalla y como habra una bruma negra el jugador ha de ir regenarado su vida antes de que se acabe con estas
-     --posiciones que con un timer iran apareciendo de manera alearoria
+function Potion:new()
+    self.recipe = {
+        seta = 1,
+        huevoSerpiente = 1,
+        caspaDeTroll = 1
+    }
+
+    self.image = love.graphics.newImage("src/textures/potion.png")
+    self.scale = 0.08
+    self.timer = 0
+    self.visible = false
+    self.position = { x = 0, y = 0 }
 end
 
-function potion:update(dt) 
-
-  
+function Potion:update(dt)
+    if self.visible then
+        self.timer = self.timer - dt
+        if self.timer <= 0 then
+            self.visible = false
+        end
+    end
 end
 
-function potion:draw()
-love.graphics.draw(
-        self.image,
-        self.position.x, self.position.y,
-        self.rot,
-        self.scale, self.scale,
-        self.origin.x, self.origin.y
-    )
+function Potion:draw()
+    if self.visible then
+        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.draw(
+            self.image,
+            self.position.x,
+            self.position.y,
+            0,
+            self.scale,
+            self.scale,
+            self.image:getWidth() / 2,
+            self.image:getHeight() / 2
+        )
+        love.graphics.setColor(1, 1, 1, 1)
+    end
 end
 
-return potion
+function Potion:canCraft(inventory)
+    for ingredient, amount in pairs(self.recipe) do
+        if inventory[ingredient] < amount then
+            return false
+        end
+    end
+    return true
+end
+
+function Potion:craft(player)
+    if not self:canCraft(player.inventory) then
+        return false
+    end
+
+    for ingredient, amount in pairs(self.recipe) do
+        player.inventory[ingredient] = player.inventory[ingredient] - amount
+    end
+
+    player.health = player.maxHealth
+    player.damageGraceTimer = 0.5
+    self.visible = true
+    self.timer = 0.8
+    self.position.x = player.position.x
+    self.position.y = player.position.y - 60
+
+    return true
+end
+
+return Potion
